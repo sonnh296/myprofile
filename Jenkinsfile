@@ -22,6 +22,7 @@ pipeline {
 
             steps {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
+                    sh 'echo start building docker image'
                     sh 'docker build -t sonnh296/mypro-spring .'
                     sh 'docker push sonnh296/mypro-spring'
                 }

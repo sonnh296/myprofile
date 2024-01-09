@@ -21,14 +21,14 @@ pipeline {
             }
         }
 
-        stage('Building our image') {
+        stage('Building image') {
             steps{
                 script {
-                    dockerImage = docker.build registry
+                    dockerImage = docker.build(springImageName, '.')
                 }
             }
         }
-        stage('Deploy our image') {
+        stage('Deploy image') {
             steps{
                 script {
                     docker.withRegistry( '', registryCredential ) {

@@ -6,7 +6,9 @@ pipeline {
         maven 'my-maven'
     }
     environment {
-        MYSQL_ROOT_LOGIN = credentials('mysql-root-login')
+        MYSQL_ROOT_LOGIN = 'mysql-root-login'
+        springImageName = "sonnh296/mypro-spring"
+        registryCredential = 'dockerhub'
     }
     stages {
 
@@ -19,13 +21,19 @@ pipeline {
             }
         }
 
-        stage('Packaging/Pushing image') {
-
-            steps {
-                withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
-                    sh 'echo start building docker image'
-                    sh 'docker build -t sonnh296/mypro-spring .'
-                    sh 'docker push sonnh296/mypro-spring'
+        stage('Building our image') {
+            steps{
+                script {
+                    dockerImage = docker.build registry
+                }
+            }
+        }
+        stage('Deploy our image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
                 }
             }
         }

@@ -1,3 +1,3 @@
 CREATE USER 'son'@'%' IDENTIFIED BY '290602';
-GRANT ALL PRIVILEGES ON db_example.* TO 'son'@'%';
+GRANT ALL PRIVILEGES ON myprofile.* TO 'son'@'%';
 FLUSH PRIVILEGES;

@@ -1,3 +1,7 @@
 CREATE USER 'son'@'%' IDENTIFIED BY '290602';
 GRANT ALL PRIVILEGES ON myprofile.* TO 'son'@'%';
+<<<<<<< HEAD
 FLUSH PRIVILEGES;
+=======
+FLUSH PRIVILEGES;
+>>>>>>> main

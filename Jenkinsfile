@@ -46,7 +46,7 @@ pipeline {
                 sh 'docker container stop myprofile-mysql || echo "this container does not exist" '
                 sh 'echo y | docker container prune '
                 sh 'docker volume rm myprofile-mysql-data || echo "no volume"'
-                sh "docker run --name myprofile-mysql --rm --network dev -v myprofile-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_LOGIN_PSW} -e MYSQL_DATABASE=myprofile  -d mysql:8.0 "
+                sh 'docker run --name myprofile-mysql --rm --network dev -v myprofile-mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_LOGIN_PSW} -e MYSQL_DATABASE=myprofile  -d mysql:8.0'
                 sh 'sleep 20'
                 sh "docker exec -i myprofile-mysql mysql --user=root --password=${MYSQL_ROOT_LOGIN_PSW} < script"
             }

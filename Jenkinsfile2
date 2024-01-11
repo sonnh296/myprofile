@@ -1,0 +1,47 @@
+pipeline {
+
+    agent any
+
+    tools {
+        maven 'my-maven'
+    }
+    environment {
+        MYSQL_ROOT_LOGIN = 'mysql-root-login'
+        springImageName = "sonnh296/mypro-spring"
+        registryCredential = 'dockerhub'
+    }
+    stages {
+
+        stage('Build with Maven') {
+            steps {
+                sh 'mvn --version'
+                sh 'java -version'
+                sh 'echo start building'
+                sh 'mvn clean package -DskipTests=true'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps{
+                sh 'docker compose up'
+                echo 'Docker-compose-build Build Image Completed'
+            }
+        }
+
+        stage('Deploy image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+    }
+    post {
+        // Clean after build
+        always {
+            cleanWs()
+        }
+    }
+}

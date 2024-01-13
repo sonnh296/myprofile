@@ -35,7 +35,7 @@ pipeline {
         stage('Push images to Docker Hub') {
             steps {
                 withDockerRegistry([credentialsId: 'dockerhub', url: 'https://registry.hub.docker.com']) {
-                    sh 'docker-compose push'
+                    sh 'docker compose push'
                 }
             }
         }

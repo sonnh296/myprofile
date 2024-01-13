@@ -32,12 +32,10 @@ pipeline {
                 echo 'succeeded'
             }
         }
-        stage('Deploy image') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push()
-                    }
+        stage('Push images to Docker Hub') {
+            steps {
+                withDockerRegistry([credentialsId: 'dockerhub', url: 'https://registry.hub.docker.com']) {
+                    sh 'docker-compose push'
                 }
             }
         }

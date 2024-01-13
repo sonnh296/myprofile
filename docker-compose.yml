@@ -7,6 +7,12 @@ services:
       - 8081:8080
     depends_on:
       - mysqldb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/myprofile
+      SPRING_DATASOURCE_USERNAME : son
+      SPRING_DATASOURCE_PASSWORD : 290602
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
 
   mysqldb:
     image: "mysql:5.7"
@@ -18,4 +24,8 @@ services:
       MYSQL_USER: son
       MYSQL_PASSWORD: 290602
       MYSQL_ROOT_PASSWORD: 290602
+    volumes:
+      - db:/var/lib/mysql
 
+volumes:
+  db:

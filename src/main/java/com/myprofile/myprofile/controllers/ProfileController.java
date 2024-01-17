@@ -1,8 +1,7 @@
 package com.myprofile.myprofile.controllers;
 
 import com.myprofile.myprofile.entities.Profile;
-import com.myprofile.myprofile.services.ProfileService;
-import jakarta.annotation.security.PermitAll;
+import com.myprofile.myprofile.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

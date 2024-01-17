@@ -1,4 +1,4 @@
-package com.myprofile.myprofile.services;
+package com.myprofile.myprofile.service;
 
 import com.myprofile.myprofile.entities.Profile;
 import com.myprofile.myprofile.reposoitories.ProfileRepository;
